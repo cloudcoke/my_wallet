@@ -1,46 +1,243 @@
-# Getting Started with Create React App
+# Setting
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 프로젝트 생성
 
-## Available Scripts
+```shell
+npx create-react-app bitcoin_wallet --template typescript
+```
 
-In the project directory, you can run:
+## 패키지 설치
 
-### `npm start`
+```shell
+npm install react-router-dom redux redux-thunk redux-persist react-redux axios
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[참고](https://velog.io/@yesoryeseul/npm-ERR-Cannot-read-properties-of-null-reading-edgesOut)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```shell
+npm i -D styled-components@5.3.10 @types/styled-components
+```
 
-### `npm test`
+## React Typescript Path Alias 설정
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[참고](https://leego.tistory.com/entry/React-CRA%EC%97%90%EC%84%9C-Path-alias-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)
 
-### `npm run build`
+```shell
+npm install @craco/craco tsconfig-paths-webpack-plugin
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+tsconfig.paths.json
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+설정할 경로 지정
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@pages/*": ["pages/*"],
+      "@routes/*": ["routes/*"]
+    }
+  }
+}
+```
 
-### `npm run eject`
+tsconfig.json
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+extends 추가
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```json
+{
+  "compilerOptions": {
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src"],
+  "extends": "./tsconfig.paths.json" // 추가
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+craco.config.js
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+craco 설정 파일 생성
 
-## Learn More
+```js
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin")
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+module.exports = {
+  plugins: [
+    {
+      plugin: {
+        overrideWebpackConfig: ({ webpackConfig }) => {
+          webpackConfig.resolve.plugins.push(new TsconfigPathsPlugin({}))
+          return webpackConfig
+        },
+      },
+    },
+  ],
+}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+package.json
+
+scripts 수정
+
+```json
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
+  },
+```
+
+## Jest Alias 설정
+
+[참고](https://cloudless.blog/post/React%20Typescript%20Jest%20%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C%20craco%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20path%20alias%20%EC%84%A4%EC%A0%95)
+
+craco.config.js
+
+plugins 밑에 추가
+
+```js
+ jest: {
+    configure: {
+      moduleNameMapper: { "^@(pages|routes)/(.+)$": "<rootDir>/src/$1/$2" },
+    },
+  },
+```
+
+## Jest Styled Components
+
+```shell
+npm install -D jest-styled-components
+```
+
+## 패키지 업그레이드
+
+[참고](https://min9nim.github.io/2018/09/npm-command/)
+
+### 패키지 정보 확인
+
+```shell
+npm info [패키지명]
+```
+
+### 프로젝트에서 사용하고 있는 오래된 패키지 확인
+
+```shell
+npm outdated
+```
+
+### 패키지 버전 수정
+
+수정 전
+
+```json
+{
+  "name": "bitcoin_wallet",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^7.1.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.28",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "axios": "^1.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.11.1",
+    "react-scripts": "5.0.1",
+    "redux": "^4.2.1",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.2",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
+  },
+  "eslintConfig": {
+    "extends": ["react-app", "react-app/jest"]
+  },
+  "browserslist": {
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26",
+    "styled-components": "^5.3.10",
+    "tsconfig-paths-webpack-plugin": "^4.0.1"
+  }
+}
+```
+
+수정 후
+
+```json
+{
+  "name": "bitcoin_wallet",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^7.1.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^16.18.28",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "axios": "^1.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.11.1",
+    "react-scripts": "5.0.1",
+    "redux": "^4.2.1",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.2",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
+  },
+  "eslintConfig": {
+    "extends": ["react-app", "react-app/jest"]
+  },
+  "browserslist": {
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26",
+    "styled-components": "^5.3.10",
+    "tsconfig-paths-webpack-plugin": "^4.0.1"
+  }
+}
+```
