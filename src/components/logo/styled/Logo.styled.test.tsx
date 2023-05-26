@@ -5,13 +5,13 @@ import testImg from "@img/testImg.png"
 
 describe("ProfileImg Styled Test", () => {
   const batch = () => {
-    const { rerender } = render(<LogoStyled />)
+    const { rerender } = render(<LogoStyled src={logo} />)
     const img = screen.getByRole("img")
 
     return { rerender, img }
   }
   test("Render", () => {
-    render(<LogoStyled />)
+    render(<LogoStyled src={logo} />)
 
     const img = screen.getByRole("img")
     expect(img).toBeInTheDocument()
@@ -33,7 +33,7 @@ describe("ProfileImg Styled Test", () => {
 
     expect(img).toHaveStyle({ width: "30px" })
 
-    rerender(<LogoStyled width="100px" />)
+    rerender(<LogoStyled src={logo} width="100px" />)
     expect(img).toHaveStyle({ width: "100px" })
   })
 
@@ -42,7 +42,7 @@ describe("ProfileImg Styled Test", () => {
 
     expect(img).toHaveStyle({ height: "30px" })
 
-    rerender(<LogoStyled height="100px" />)
+    rerender(<LogoStyled src={logo} height="100px" />)
     expect(img).toHaveStyle({ height: "100px" })
   })
 
@@ -51,7 +51,7 @@ describe("ProfileImg Styled Test", () => {
 
     expect(img).toHaveStyle({ borderRadius: "100px" })
 
-    rerender(<LogoStyled borderRadius="200px" />)
+    rerender(<LogoStyled src={logo} borderRadius="200px" />)
     expect(img).toHaveStyle({ borderRadius: "200px" })
   })
 })

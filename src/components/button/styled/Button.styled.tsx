@@ -9,14 +9,19 @@ export const ButtonStyled = styled.button<IButton>`
   background-color: ${({ backgroundColor }) =>
     backgroundColor
       ? colorChip[backgroundColor as keyof typeof colorChip].backgroundColor
-      : colorChip["red"].backgroundColor};
+      : colorChip["blue"].backgroundColor};
+  border: none;
+  color: ${({ color }) => (color ? color : "#ffffff")};
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "20px")};
+  margin: 0 auto;
+  margin-top: ${({ marginTop }) => (marginTop ? marginTop : "0px")};
 
   &:hover {
     background: ${({ backgroundColor }) =>
-      backgroundColor ? colorChip[backgroundColor as keyof typeof colorChip].hover : colorChip["red"].hover};
+      backgroundColor ? colorChip[backgroundColor as keyof typeof colorChip].hover : colorChip["blue"].hover};
   }
 
-  & > svg {
+  & > a > svg {
     width: ${({ width }) => (width ? width : "100%")};
     height: ${({ height }) => (height ? height : "100%")};
   }

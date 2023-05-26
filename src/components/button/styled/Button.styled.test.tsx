@@ -48,21 +48,39 @@ describe("Button Styled Test", () => {
   test("Background", () => {
     const { rerender, button } = batch()
 
-    expect(button).toHaveStyle({ backgroundColor: `${colorChip["red"].backgroundColor}` })
-
-    rerender(<ButtonStyled backgroundColor="blue" />)
     expect(button).toHaveStyle({ backgroundColor: `${colorChip["blue"].backgroundColor}` })
+
+    rerender(<ButtonStyled backgroundColor="red" />)
+    expect(button).toHaveStyle({ backgroundColor: `${colorChip["red"].backgroundColor}` })
+  })
+
+  test("Color", () => {
+    const { rerender, button } = batch()
+
+    expect(button).toHaveStyle({ color: "#ffffff" })
+
+    rerender(<ButtonStyled color="red" />)
+    expect(button).toHaveStyle({ color: "red" })
+  })
+
+  test("Font Size", () => {
+    const { rerender, button } = batch()
+
+    expect(button).toHaveStyle({ fontSize: "20px" })
+
+    rerender(<ButtonStyled fontSize="10px" />)
+    expect(button).toHaveStyle({ fontSize: "10px" })
   })
 
   test("Hover", () => {
     const { rerender, button } = batch()
 
-    expect(button).toHaveStyleRule("background", `${colorChip["red"].hover}`, {
+    expect(button).toHaveStyleRule("background", `${colorChip["blue"].hover}`, {
       modifier: ":hover",
     })
 
-    rerender(<ButtonStyled backgroundColor="blue" />)
-    expect(button).toHaveStyleRule("background", `${colorChip["blue"].hover}`, {
+    rerender(<ButtonStyled backgroundColor="red" />)
+    expect(button).toHaveStyleRule("background", `${colorChip["red"].hover}`, {
       modifier: ":hover",
     })
   })
@@ -70,7 +88,9 @@ describe("Button Styled Test", () => {
   test("SVG", () => {
     const { rerender } = render(
       <ButtonStyled>
-        <svg data-testid="svg"></svg>
+        <a href="/">
+          <svg data-testid="svg"></svg>
+        </a>
       </ButtonStyled>
     )
 
@@ -79,7 +99,9 @@ describe("Button Styled Test", () => {
 
     rerender(
       <ButtonStyled width="30px" height="30px">
-        <svg data-testid="svg"></svg>
+        <a href="/">
+          <svg data-testid="svg"></svg>
+        </a>
       </ButtonStyled>
     )
     expect(svg).toHaveStyle({ width: "30px", height: "30px" })

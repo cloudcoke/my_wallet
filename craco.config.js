@@ -13,7 +13,9 @@ module.exports = {
   ],
   jest: {
     configure: {
-      moduleNameMapper: { "^@(pages|routes|common|components|interface|img)/(.+)$": "<rootDir>/src/$1/$2" },
+      moduleNameMapper: {
+        "^@(pages|routes|common|components|interface|img|context|hook|store)/(.+)$": "<rootDir>/src/$1/$2",
+      },
     },
   },
 }

@@ -11,7 +11,7 @@ export const FooterStyled = styled.div<IFooter>`
   ${({ display, justifyContent, alignItems }) =>
     (display === "flex" || display === undefined) &&
     `
-    justify-content: ${justifyContent ? justifyContent : "center"};
+    justify-content: ${justifyContent ? justifyContent : "space-around"};
     align-items: ${alignItems ? alignItems : "center"};
   `}
 

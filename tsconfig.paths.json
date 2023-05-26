@@ -7,7 +7,10 @@
       "@common/*": ["common/*"],
       "@components/*": ["components/*"],
       "@interface/*": ["interface/*"],
-      "@img/*": ["img/*"]
+      "@img/*": ["img/*"],
+      "@context/*": ["context/*"],
+      "@hook/*": ["hook/*"],
+      "@store/*": ["store/*"]
     }
   }
 }

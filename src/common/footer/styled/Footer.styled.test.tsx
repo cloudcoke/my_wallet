@@ -55,10 +55,10 @@ describe("Footer Styled Test", () => {
   test("Display Flex Content Location", () => {
     const { rerender, footer } = batch()
 
-    expect(footer).toHaveStyle({ display: "flex", justifyContent: "center", alignItems: "center" })
+    expect(footer).toHaveStyle({ display: "flex", justifyContent: "space-around", alignItems: "center" })
 
     rerender(<FooterStyled display="none" />)
-    expect(footer).not.toHaveStyle({ display: "flex", justifyContent: "center", alignItems: "center" })
+    expect(footer).not.toHaveStyle({ display: "flex", justifyContent: "space-around", alignItems: "center" })
   })
 
   test("Justify Content", () => {

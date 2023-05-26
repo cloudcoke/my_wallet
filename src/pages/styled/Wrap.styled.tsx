@@ -8,5 +8,6 @@ export const WrapStyled = styled.div`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+  overflow: hidden;
 `

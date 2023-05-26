@@ -9,6 +9,10 @@ export class IDefaultStyle {
 export class IButton extends IDefaultStyle {
   borderRadius?: string
   backgroundColor?: string
+  color?: string
+  fontSize?: string
+  marginTop?: string
+  onClick?: () => void
 }
 
 export class IBox extends IDefaultStyle {
@@ -27,10 +31,12 @@ export class IInput extends IDefaultStyle {
   borderRadius?: string
   border?: string
   placeholder?: string
+  value?: string | number
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export class ILogo extends IDefaultStyle {
-  src?: string
+  src!: string
   borderRadius?: string
 }
 
@@ -49,4 +55,34 @@ export class ITitle extends IDefaultStyle {
 
 export class IHeader extends IDefaultStyle {
   backgroundColor?: string
+  padding?: string
+  display?: string
+  justifyContent?: string
+  alignItems?: string
+}
+
+export class IHash extends IDefaultStyle {
+  fontSize?: string
+  color?: string
+  borderBottom?: string
+  display?: string
+  justifyContent?: string
+  alignItems?: string
+  flexDirection?: string
+  margin?: string
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void
+}
+
+export class IText extends IDefaultStyle {
+  fontSize?: string
+  color?: string
+  marginTop?: string
+  marginBottom?: string
+}
+
+export class IWrap extends IDefaultStyle {
+  display?: string
+  justifyContent?: string
+  alignItems?: string
+  flexDirection?: string
 }
